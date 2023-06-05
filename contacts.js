@@ -46,8 +46,8 @@ const addContact = async (name, email, phone) => {
       email,
       phone,
     };
-    const updatedContacts = [newContact, ...contacts];
-    await fs.writeFile(contactsPath, JSON.stringify(updatedContacts, null, 2), {
+    contacts.push(newContact);
+    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2), {
       encoding: "utf-8",
     });
     return newContact;
@@ -55,8 +55,6 @@ const addContact = async (name, email, phone) => {
     console.log(`Error: ${error.message}`.red);
   }
 };
-
-listContacts();
 
 module.exports = {
   listContacts,
